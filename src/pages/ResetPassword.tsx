@@ -23,7 +23,7 @@ export default function ResetPassword() {
       // Also check if user is already authenticated via recovery flow
       supabase.auth.getSession().then(({ data: { session } }) => {
         if (session) setReady(true);
-        else navigate('/auth');
+        else goAuth();
       });
     }
   }, [navigate]);
@@ -36,7 +36,7 @@ export default function ResetPassword() {
     if (error) toast.error(error.message);
     else {
       toast.success('Password updated! Redirecting...');
-      setTimeout(() => navigate('/'), 1500);
+      setTimeout(() => goHome(), 1500);
     }
     setLoading(false);
   };

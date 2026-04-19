@@ -237,14 +237,15 @@ export default function MonthlyPnlTab() {
     const detailedMap: Record<string, { owner: string; type: string; pl: number; trades: number; maxDD: number; peak: number; cum: number }> = {};
     let maxDD = 0, peak = 0, cum = 0;
     let bestStreak = 0, worstStreak = 0, curWin = 0, curLoss = 0;
-    let bigWin: typeof sorted[0] | null = null, bigLoss: typeof sorted[0] | null = null;
+    type SortedTrade = (typeof sorted)[number];
+    let bigWin: SortedTrade | null = null, bigLoss: SortedTrade | null = null;
 
     sorted.forEach(t => {
       totalPL += t.pl; cum += t.pl;
       if (cum > peak) peak = cum;
       if (peak - cum > maxDD) maxDD = peak - cum;
-      if (t.pl > 0) { wins++; grossWin += t.pl; curWin++; curLoss = 0; if (curWin > bestStreak) bestStreak = curWin; if (!bigWin || t.pl > bigWin.pl) bigWin = t; }
-      else if (t.pl < 0) { grossLoss += Math.abs(t.pl); curLoss++; curWin = 0; if (curLoss > worstStreak) worstStreak = curLoss; if (!bigLoss || t.pl < bigLoss.pl) bigLoss = t; }
+      if (t.pl > 0) { wins++; grossWin += t.pl; curWin++; curLoss = 0; if (curWin > bestStreak) bestStreak = curWin; if (!bigWin || t.pl > (bigWin as SortedTrade).pl) bigWin = t; }
+      else if (t.pl < 0) { grossLoss += Math.abs(t.pl); curLoss++; curWin = 0; if (curLoss > worstStreak) worstStreak = curLoss; if (!bigLoss || t.pl < (bigLoss as SortedTrade).pl) bigLoss = t; }
 
       const addTo = (map: any, key: string) => {
         if (!key) return;
