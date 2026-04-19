@@ -280,7 +280,10 @@ export default function MonthlyPnlTab() {
     const worstMonth = monthlyData.length ? monthlyData.reduce((a, b) => a.pl < b.pl ? a : b) : null;
 
     return {
-      totalPL, total, winRate, profitFactor, expectancy, recoveryFactor, rrRatio, maxDD, bestStreak, worstStreak, bigWin, bigLoss, avgPL, bestMonth, worstMonth,
+      totalPL, total, winRate, profitFactor, expectancy, recoveryFactor, rrRatio, maxDD, bestStreak, worstStreak,
+      bigWin: bigWin as SortedTrade | null,
+      bigLoss: bigLoss as SortedTrade | null,
+      avgPL, bestMonth, worstMonth,
       ownerList: buildLeaderboard(ownerMap),
       typeList: buildLeaderboard(typeMap),
       subCatList: buildLeaderboard(subCatMap),

@@ -13,10 +13,9 @@ interface NavLinkCompatProps {
 const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
   ({ className, activeClassName, to, children }, ref) => {
     return (
-      // @ts-expect-error - generic string-to route widening
       <Link
         ref={ref}
-        to={to}
+        to={to as string}
         className={cn(className)}
         activeProps={{ className: activeClassName }}
       >
