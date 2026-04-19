@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Brain, CheckCircle2, AlertTriangle, XCircle, TrendingUp, Shield, Zap, RefreshCw, Loader2, Info, ArrowUp, ArrowDown, Minus } from 'lucide-react';
 import { toast } from 'sonner';
 import { formatINR } from '@/lib/format';
+import RobustnessTests from './RobustnessTests';
 
 interface MetricAnalysis {
   name: string;
@@ -204,6 +205,9 @@ export default function AIAnalysisTab() {
           </CardContent>
         </Card>
       )}
+
+      {/* Robustness Tests — always available, independent of AI analysis */}
+      <RobustnessTests />
 
       {analysis && !loading && (
         <>
