@@ -56,7 +56,7 @@ export function useManualTrades() {
   useEffect(() => { localStorage.setItem(GAS_URL_KEY, gasUrl); }, [gasUrl]);
 
   // Auto-sync to GAS whenever trades change (debounced)
-  const autoSyncTimer = useRef<ReturnType<typeof setTimeout>>();
+  const autoSyncTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const initialLoad = useRef(true);
   useEffect(() => {
     // Skip the initial load

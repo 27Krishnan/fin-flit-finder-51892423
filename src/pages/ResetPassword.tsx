@@ -3,7 +3,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from '@tanstack/react-router';
 import { Loader2 } from 'lucide-react';
 
 export default function ResetPassword() {
@@ -11,6 +11,8 @@ export default function ResetPassword() {
   const [loading, setLoading] = useState(false);
   const [ready, setReady] = useState(false);
   const navigate = useNavigate();
+  const goAuth = () => navigate({ to: '/auth' });
+  const goHome = () => navigate({ to: '/' });
 
   useEffect(() => {
     // Check for recovery token in URL
